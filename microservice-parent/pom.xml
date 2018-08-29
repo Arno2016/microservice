@@ -13,6 +13,8 @@
   	<module>microservice-hystrix-10089</module>
   	<module>microservice-zuul-10091</module>
   	<module>microservice-zipkin-10092</module>
+	<module>microservice-config-server-10093</module>
+	<module>microservice-config-client-10094</module>
   </modules>
   
    <properties>
