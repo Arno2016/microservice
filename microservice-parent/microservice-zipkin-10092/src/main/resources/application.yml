@@ -1,0 +1,25 @@
+server:
+  port: 10092
+spring:
+  application:
+    name: zipkin
+  datasource:
+    #schema: classpath:/mysql.sql
+    url: jdbc:mysql://127.0.0.1:3306/zipkin
+    username: root
+    password: root
+     
+#eureka
+eureka: 
+  client:
+    service-url:
+      defaultZone: http://localhost:10090/eureka/
+
+#zipkin
+management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false
+
+    
