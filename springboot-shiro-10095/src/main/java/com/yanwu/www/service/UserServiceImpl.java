@@ -49,18 +49,12 @@ public class UserServiceImpl implements UserService {
 		
 		Subject subject = SecurityUtils.getSubject();
 		
-		try{
-			subject.login(usernamePasswordToken);
+		subject.login(usernamePasswordToken);
 			
-			// 设置闲置session时间
-			subject.getSession().setTimeout(5*1000);
-			return "login ok";
-		}catch( AuthenticationException e){
-			System.out.println("==========");
-			System.out.println(e.getMessage());
-		}
+		// 设置闲置session时间
+		subject.getSession().setTimeout(1800*1000);
 		
-		return "login failure";
+		return "login ok";
 
 	}
 

@@ -11,7 +11,10 @@
 package com.yanwu.www.config;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+
+import javax.servlet.Filter;
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
@@ -76,6 +79,15 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
+        
+        //自定义拦截器
+        Map<String, Filter> filtersMap = new LinkedHashMap<String, Filter>();
+        
+        // 认证拦截器
+        filtersMap.put("authc", new MyAuthenticationFilter());
+        
+        shiroFilterFactoryBean.setFilters(filtersMap);
+        
         Map<String,String> map = new HashMap<String, String>();
         
         //anon表示可以匿名访问,authc表示需要认证
@@ -83,16 +95,18 @@ public class ShiroConfig {
         map.put("/logout","anon");
         //对所有用户认证 
         map.put("/**","authc");
+        
         //登录
         shiroFilterFactoryBean.setLoginUrl("/login");
         
         //首页
-        shiroFilterFactoryBean.setSuccessUrl("/index");
+        //shiroFilterFactoryBean.setSuccessUrl("/index");
         
         //错误页面，认证不通过跳转
-        shiroFilterFactoryBean.setUnauthorizedUrl("/error");
+        //shiroFilterFactoryBean.setUnauthorizedUrl("/error");
         
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
+        
         return shiroFilterFactoryBean;
     }
 
