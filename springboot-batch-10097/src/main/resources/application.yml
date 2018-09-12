@@ -1,0 +1,30 @@
+server:
+  port: 10097
+spring:
+  application:
+    name: batch
+#  zipkin:
+#    base-url: http://127.0.0.1:10092
+#eureka
+#eureka: 
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:10090/eureka/
+
+#注意，需要先初始化batch的9张表，在org\springframework\batch\spring-batch-core\4.0.1.RELEASE\spring-batch-core-4.0.1.RELEASE.jar目录下
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/batch?useUnicode=true&amp;characterEncoding=UTF-8
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+  batch:
+    job:
+      enabled: false   #启动不自动执行一次job
+    initialize-schema: always #embedded初始化内嵌数据库，always是初始化所有类型的数据库
+      
+      
